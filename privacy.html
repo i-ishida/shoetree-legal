@@ -5,17 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>プライバシーポリシー | ShoeTree</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif; line-height: 1.8; max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; color: #222; }
-  h1 { font-size: 1.4rem; border-bottom: 2px solid #333; padding-bottom: 8px; }
-  h2 { font-size: 1.1rem; margin-top: 2.2em; }
-  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.92rem; }
-  th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: left; vertical-align: top; }
-  th { background: #f4f4f4; }
-  .updated { color: #666; font-size: 0.9rem; }
+  :root {
+    --paper: #14130F;
+    --paper-raised: #1D1B17;
+    --ink: #EFE9DD;
+    --line: #343026;
+    --line-strong: #4A4536;
+    --muted: #9C927E;
+    --accent: #D69A54;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 680px; margin: 0 auto; padding: 72px 24px 120px; }
+  .eyebrow {
+    font-family: Menlo, "SF Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Hiragino Mincho ProN", serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0 0 8px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin: 0 0 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", "Hiragino Mincho ProN", serif;
+    color: var(--accent);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.9em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--line);
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  p { margin: 0 0 1em; }
+  ul, ol { padding-left: 1.3em; margin: 0 0 1em; }
+  li { margin-bottom: 0.4em; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(214,154,84,0.35); }
+  a:hover { border-bottom-color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; margin: 1.4em 0; font-size: 0.92rem; }
+  th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--paper-raised); color: var(--muted); font-weight: 600; font-size: 0.82rem; }
+  .footer-nav { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.85rem; }
+  .footer-nav a { color: var(--muted); border-bottom: none; }
+  .footer-nav a:hover { color: var(--accent); }
 </style>
 </head>
 <body>
+<div class="page">
 
+<div class="eyebrow">SHOETREE</div>
 <h1>プライバシーポリシー</h1>
 <p class="updated">最終更新日: 2026年7月22日</p>
 
@@ -77,5 +133,10 @@
 <h2>7. 本ポリシーの変更</h2>
 <p>本ポリシーの内容は、法令の変更やサービス内容の変更に応じて予告なく改定されることがあります。重要な変更がある場合は、アプリ内でお知らせします。</p>
 
+<div class="footer-nav">
+  <a href="index.html">← ShoeTree 各種規約</a> ・ <a href="terms.html">利用規約</a> ・ <a href="support.html">サポート</a>
+</div>
+
+</div>
 </body>
 </html>

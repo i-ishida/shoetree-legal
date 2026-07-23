@@ -5,17 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ShoeTree - 各種規約</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif; max-width: 480px; margin: 80px auto; padding: 0 20px; color: #222; }
-  h1 { font-size: 1.3rem; }
-  ul { padding-left: 1.2em; line-height: 2; }
+  :root {
+    --paper: #14130F;
+    --paper-raised: #1D1B17;
+    --ink: #EFE9DD;
+    --line: #343026;
+    --line-strong: #4A4536;
+    --muted: #9C927E;
+    --accent: #D69A54;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 96px 24px 120px;
+  }
+  .eyebrow {
+    font-family: Menlo, "SF Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Hiragino Mincho ProN", serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0 0 40px;
+  }
+  .card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 22px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color .15s;
+  }
+  .card-link:hover { border-color: var(--accent); }
+  .card-link .label { font-weight: 600; }
+  .card-link .chev { color: var(--muted); }
 </style>
 </head>
 <body>
-<h1>ShoeTree</h1>
-<ul>
-  <li><a href="privacy.html">プライバシーポリシー</a></li>
-  <li><a href="terms.html">利用規約</a></li>
-  <li><a href="support.html">サポート</a></li>
-</ul>
+<div class="page">
+  <div class="eyebrow">SHOETREE</div>
+  <h1>各種規約</h1>
+  <div class="card-list">
+    <a class="card-link" href="privacy.html"><span class="label">プライバシーポリシー</span><span class="chev">›</span></a>
+    <a class="card-link" href="terms.html"><span class="label">利用規約</span><span class="chev">›</span></a>
+    <a class="card-link" href="support.html"><span class="label">サポート</span><span class="chev">›</span></a>
+  </div>
+</div>
 </body>
 </html>
