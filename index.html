@@ -192,7 +192,21 @@
   }
   .about-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:56px; align-items:center; }
   @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } }
-  .tree-icon{ width:100%; max-width:220px; }
+  .photo-frame{
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--line-strong);
+    box-shadow:0 40px 70px -30px rgba(0,0,0,.6);
+    aspect-ratio:4/3;
+  }
+  .photo-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-frame::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,19,15,0) 55%, rgba(20,19,15,.55) 100%);
+    pointer-events:none;
+  }
   .about p{ color:var(--muted); font-size:15.5px; max-width:520px; }
   .about p strong{ color:var(--ink); font-weight:600; }
 
@@ -354,15 +368,9 @@
   <section class="about">
     <div class="container about-grid">
       <div class="reveal">
-        <svg class="tree-icon" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <ellipse cx="100" cy="205" rx="70" ry="9" fill="var(--line)"/>
-          <path d="M40 90 C40 60 65 40 100 40 C140 40 165 65 168 100 C170 130 160 150 130 160 L60 168 C42 165 32 150 32 130 C32 115 34 100 40 90 Z"
-                stroke="var(--muted)" stroke-width="2.5"/>
-          <path d="M55 95 C58 78 74 65 96 63" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="100" y1="63" x2="100" y2="196" stroke="var(--muted)" stroke-width="2.5"/>
-          <circle cx="100" cy="63" r="6" fill="var(--paper)" stroke="var(--accent)" stroke-width="2.5"/>
-          <path d="M78 168 Q100 178 122 168" stroke="var(--line-strong)" stroke-width="2"/>
-        </svg>
+        <div class="photo-frame">
+          <img src="img/shoe-tree.jpg" alt="職人の手で革靴にシューツリー（木型）を差し込んでいる様子">
+        </div>
       </div>
       <div class="reveal">
         <div class="eyebrow">名前の由来</div>
@@ -541,5 +549,6 @@
     els.forEach(function(el){ io.observe(el); });
   })();
 </script>
+
 </body>
 </html>
