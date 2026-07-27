@@ -3,75 +3,544 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ShoeTree - 各種規約</title>
+<meta name="description" content="革靴を記録する、お手入れを続ける。着用・お手入れ・修理の記録をシンプルに管理する、革靴のための手入れ手帳アプリ ShoeTree（シューツリー）。">
+<title>ShoeTree — 革靴の手入れ手帳</title>
 <style>
-  :root {
-    --paper: #14130F;
-    --paper-raised: #1D1B17;
-    --ink: #EFE9DD;
+  /* Single committed dark theme, matching the app's own "Atelier Noir" identity
+     (paper.dart), which deliberately ships with no light variant. This page
+     keeps the same intentional world rather than inverting it. */
+  :root{
+    --paper: #14130f;
+    --paper-raised: #1d1b17;
+    --paper-raised-2: #221f18;
+    --ink: #efe9dd;
+    --muted: #9c927e;
+    --muted-2: #6f6656;
     --line: #343026;
-    --line-strong: #4A4536;
-    --muted: #9C927E;
-    --accent: #D69A54;
+    --line-strong: #4a4536;
+    --accent: #d69a54;
+    --accent-ink: #1e1710;
+    --accent-bg: #2c2216;
+    --warn: #e0897c;
+
+    --font-display: Georgia, 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif;
+    --font-mono: 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-    -webkit-font-smoothing: antialiased;
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(214,154,84,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(214,154,84,0.06), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  .page {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 96px 24px 120px;
+
+  a{ color:inherit; }
+  .container{ max-width:1080px; margin:0 auto; padding:0 24px; }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    color:var(--muted);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:10px;
   }
-  .eyebrow {
-    font-family: Menlo, "SF Mono", monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 14px;
+  .eyebrow::before{
+    content:"";
+    width:20px; height:1px;
+    background:var(--line-strong);
+    display:inline-block;
   }
-  h1 {
-    font-family: Georgia, "Iowan Old Style", "Hiragino Mincho ProN", serif;
-    font-weight: 700;
-    font-size: 1.8rem;
-    margin: 0 0 40px;
+  h1,h2,h3{ font-family:var(--font-display); font-weight:700; text-wrap:balance; margin:0; }
+  .section{ padding:96px 0; }
+  .section-head{ max-width:640px; margin:0 0 48px; }
+  .section-head h2{ margin-top:14px; font-size:clamp(24px,3.4vw,34px); }
+  .rule{ height:1px; background:var(--line); border:0; margin:0; }
+
+  /* reveal-on-scroll */
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(20,19,15,0.82);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
   }
-  .card-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .brand{ display:flex; align-items:center; gap:9px; text-decoration:none; }
+  .brand .mark{ font-size:20px; line-height:1; }
+  .brand .word{ font-family:var(--font-mono); font-size:14px; letter-spacing:.16em; color:var(--ink); }
+  nav.links{ display:flex; gap:28px; align-items:center; }
+  nav.links a{ font-size:14px; color:var(--muted); text-decoration:none; }
+  nav.links a:hover{ color:var(--ink); }
+  nav.links a.cta{
+    border:1px solid var(--line-strong);
+    padding:8px 16px;
+    border-radius:100px;
+    color:var(--ink);
+    font-size:13px;
   }
-  .card-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 22px;
-    background: var(--paper-raised);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    color: var(--ink);
-    text-decoration: none;
-    transition: border-color .15s;
+  nav.links a.cta:hover{ border-color:var(--accent); color:var(--accent); }
+  @media (max-width:720px){
+    nav.links a:not(.cta){ display:none; }
   }
-  .card-link:hover { border-color: var(--accent); }
-  .card-link .label { font-weight: 600; }
-  .card-link .chev { color: var(--muted); }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:88px 0 72px; position:relative; }
+  .hero-mark{ font-size:44px; line-height:1; margin-bottom:16px; }
+  .hero h1{
+    font-size:clamp(30px,5.2vw,52px);
+    margin-top:18px;
+    letter-spacing:.01em;
+  }
+  .hero p.lede{
+    max-width:520px;
+    margin:22px 0 0;
+    color:var(--muted);
+    font-size:16px;
+  }
+  .hero-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:36px; }
+  .badge-soon{
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--accent-bg);
+    border:1px solid var(--line-strong);
+    color:var(--accent);
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:.04em;
+    padding:12px 20px;
+    border-radius:100px;
+  }
+  .badge-soon .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 0 rgba(214,154,84,.55);
+    animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(214,154,84,.45); }
+    70%{ box-shadow:0 0 0 8px rgba(214,154,84,0); }
+    100%{ box-shadow:0 0 0 0 rgba(214,154,84,0); }
+  }
+  @media (prefers-reduced-motion: reduce){ .badge-soon .dot{ animation:none; } }
+  .link-notify{
+    font-size:14px;
+    color:var(--muted);
+    text-decoration:underline;
+    text-underline-offset:4px;
+    text-decoration-color:var(--line-strong);
+  }
+  .link-notify:hover{ color:var(--ink); text-decoration-color:var(--accent); }
+
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- phone mockup (built from real app copy/colors, not a screenshot) ---------- */
+  .phone-wrap{ display:flex; justify-content:center; }
+  .phone{
+    width:290px;
+    border-radius:34px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.02);
+    padding:14px 14px 20px;
+  }
+  .phone-notch{ width:60px; height:5px; border-radius:4px; background:var(--line-strong); margin:0 auto 14px; }
+  .phone-head{ display:flex; align-items:center; justify-content:space-between; padding:0 4px 14px; border-bottom:1px solid var(--line); margin-bottom:14px; }
+  .phone-head .t1{ font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; color:var(--muted); }
+  .phone-head .t2{ font-family:var(--font-display); font-size:15px; font-weight:700; }
+  .shoe-row{ display:flex; align-items:center; gap:12px; padding:11px 4px; border-bottom:1px solid var(--line); }
+  .shoe-row:last-child{ border-bottom:none; }
+  .swatch{ width:38px; height:38px; border-radius:9px; flex:none; box-shadow:inset 0 0 0 1px rgba(255,255,255,.06); }
+  .tone-brown{ background:#a06b35; }
+  .tone-navy{ background:#37464c; }
+  .tone-black{ background:#3a342e; }
+  .tone-burgundy{ background:#8a3230; }
+  .shoe-meta{ flex:1; min-width:0; }
+  .shoe-meta .name{ font-family:var(--font-display); font-size:14.5px; font-weight:700; }
+  .shoe-meta .sub{ font-family:var(--font-mono); font-size:10.5px; color:var(--muted); margin-top:3px; }
+  .shoe-flag{
+    font-family:var(--font-mono); font-size:9.5px; letter-spacing:.04em;
+    padding:3px 8px; border-radius:100px; white-space:nowrap;
+  }
+  .flag-ok{ background:rgba(214,154,84,.12); color:var(--accent); }
+  .flag-due{ background:rgba(224,137,124,.14); color:var(--warn); }
+  .phone-foot{ margin-top:14px; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:space-between; }
+  .phone-foot span{ font-family:var(--font-mono); font-size:9.5px; color:var(--muted-2); }
+
+  /* ---------- about / naming ---------- */
+  .about{
+    background:var(--paper-raised);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .about-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:56px; align-items:center; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } }
+  .tree-icon{ width:100%; max-width:220px; }
+  .about p{ color:var(--muted); font-size:15.5px; max-width:520px; }
+  .about p strong{ color:var(--ink); font-weight:600; }
+
+  /* ---------- features ---------- */
+  .feature-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  @media (max-width:860px){ .feature-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature{
+    background:var(--paper);
+    padding:32px 26px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    transition:background .25s ease;
+  }
+  .feature:hover{ background:var(--paper-raised); }
+  .feature .tag{ font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--muted-2); }
+  .feature h3{ font-size:17px; }
+  .feature p{ margin:0; color:var(--muted); font-size:14.5px; }
+
+  /* ---------- how it works ---------- */
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; counter-reset:step; }
+  @media (max-width:780px){ .steps{ grid-template-columns:1fr; } }
+  .step{ position:relative; padding-top:28px; border-top:1px solid var(--line-strong); }
+  .step .num{ font-family:var(--font-mono); font-size:12px; color:var(--accent); letter-spacing:.08em; }
+  .step h3{ font-size:18px; margin-top:10px; }
+  .step p{ color:var(--muted); font-size:14.5px; margin:10px 0 0; }
+
+  /* ---------- pricing ---------- */
+  .plans{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:720px){ .plans{ grid-template-columns:1fr; } }
+  .plan{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:32px 28px;
+    background:var(--paper-raised);
+  }
+  .plan.pro{ border-color:var(--accent); background:linear-gradient(180deg, var(--accent-bg), var(--paper-raised) 60%); position:relative; }
+  .plan-name{ font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; color:var(--muted); }
+  .plan.pro .plan-name{ color:var(--accent); }
+  .plan-price{ font-family:var(--font-display); font-size:28px; font-weight:700; margin-top:10px; }
+  .plan-price small{ font-family:var(--font-body); font-size:13px; font-weight:400; color:var(--muted); }
+  .plan ul{ list-style:none; margin:22px 0 0; padding:0; display:flex; flex-direction:column; gap:11px; }
+  .plan li{ font-size:14px; color:var(--ink); display:flex; gap:10px; }
+  .plan li::before{ content:"—"; color:var(--muted-2); flex:none; }
+  .plan.pro li::before{ color:var(--accent); }
+  .plan-note{ margin-top:20px; font-size:12.5px; color:var(--muted-2); }
+
+  /* ---------- final cta ---------- */
+  .cta-final{ text-align:center; }
+  .cta-final h2{ font-size:clamp(24px,4vw,36px); }
+  .cta-final p{ color:var(--muted); margin:16px auto 0; max-width:440px; }
+  .cta-final .hero-actions{ justify-content:center; margin-top:32px; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:1px solid var(--line); padding:48px 0 40px; }
+  .foot-grid{ display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap; }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .foot-links a{ font-size:13px; color:var(--muted); text-decoration:none; }
+  .foot-links a:hover{ color:var(--ink); }
+  .foot-legal{ margin-top:28px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  .foot-legal span, .foot-legal a{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted-2); text-decoration:none; }
+  .foot-legal a:hover{ color:var(--muted); }
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="eyebrow">SHOETREE</div>
-  <h1>各種規約</h1>
-  <div class="card-list">
-    <a class="card-link" href="privacy.html"><span class="label">プライバシーポリシー</span><span class="chev">›</span></a>
-    <a class="card-link" href="terms.html"><span class="label">利用規約</span><span class="chev">›</span></a>
-    <a class="card-link" href="support.html"><span class="label">サポート</span><span class="chev">›</span></a>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">
+      <span class="mark">👞</span>
+      <span class="word">SHOETREE</span>
+    </a>
+    <nav class="links">
+      <a href="#features">特徴</a>
+      <a href="#how">使い方</a>
+      <a href="#pricing">プラン</a>
+      <a href="#contact" class="cta">お問い合わせ</a>
+    </nav>
   </div>
-</div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-mark">👞</div>
+        <div class="eyebrow">革靴の手入れ手帳</div>
+        <h1>革靴を記録する、<br>お手入れを続ける。</h1>
+        <p class="lede">
+          着用・お手入れ・修理の記録をシンプルに。あなたの革靴のための手入れ手帳です。
+          一足ずつ登録して、履いた日もお手入れした日も、そのまま記録として積み重なっていきます。
+        </p>
+        <div class="hero-actions">
+          <span class="badge-soon"><span class="dot"></span>App Store 近日公開</span>
+          <a class="link-notify" href="mailto:ishida.ippei.shoetree@gmail.com?subject=ShoeTreeの公開通知を希望">
+            公開時にお知らせを受け取る →
+          </a>
+        </div>
+      </div>
+
+      <div class="phone-wrap reveal">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-head">
+            <div>
+              <div class="t1">SHOETREE</div>
+              <div class="t2">靴棚</div>
+            </div>
+            <div class="t1">4足登録中</div>
+          </div>
+
+          <div class="shoe-row">
+            <div class="swatch tone-brown"></div>
+            <div class="shoe-meta">
+              <div class="name">ストレートチップ</div>
+              <div class="sub">ブラウン ・ 最終着用 3日前</div>
+            </div>
+            <div class="shoe-flag flag-ok">良好</div>
+          </div>
+
+          <div class="shoe-row">
+            <div class="swatch tone-black"></div>
+            <div class="shoe-meta">
+              <div class="name">プレーントゥ</div>
+              <div class="sub">ブラック ・ 最終手入れ 21日前</div>
+            </div>
+            <div class="shoe-flag flag-due">手入れ推奨</div>
+          </div>
+
+          <div class="shoe-row">
+            <div class="swatch tone-navy"></div>
+            <div class="shoe-meta">
+              <div class="name">ローファー</div>
+              <div class="sub">ネイビー ・ 最終着用 昨日</div>
+            </div>
+            <div class="shoe-flag flag-ok">良好</div>
+          </div>
+
+          <div class="shoe-row">
+            <div class="swatch tone-burgundy"></div>
+            <div class="shoe-meta">
+              <div class="name">ウイングチップ</div>
+              <div class="sub">バーガンディ ・ 修理履歴あり</div>
+            </div>
+            <div class="shoe-flag flag-ok">良好</div>
+          </div>
+
+          <div class="phone-foot">
+            <span>WEAR ・ CARE ・ REPAIR</span>
+            <span>90日ビュー</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container about-grid">
+      <div class="reveal">
+        <svg class="tree-icon" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="100" cy="205" rx="70" ry="9" fill="var(--line)"/>
+          <path d="M40 90 C40 60 65 40 100 40 C140 40 165 65 168 100 C170 130 160 150 130 160 L60 168 C42 165 32 150 32 130 C32 115 34 100 40 90 Z"
+                stroke="var(--muted)" stroke-width="2.5"/>
+          <path d="M55 95 C58 78 74 65 96 63" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="100" y1="63" x2="100" y2="196" stroke="var(--muted)" stroke-width="2.5"/>
+          <circle cx="100" cy="63" r="6" fill="var(--paper)" stroke="var(--accent)" stroke-width="2.5"/>
+          <path d="M78 168 Q100 178 122 168" stroke="var(--line-strong)" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">名前の由来</div>
+        <h2>シューツリーは、木型の名前。</h2>
+        <p>
+          シューツリーとは、履き終えた革靴に入れてその形を保つための木型（シューキーパー）のこと。
+          一足の革靴と長く付き合うための、いちばん身近な道具です。
+        </p>
+        <p>
+          アプリの中の<strong>「シューツリー」</strong>も、役割は同じです。
+          いつ履いたか、いつ手入れをしたか、いつ修理に出したか——
+          その一足だけのために、記録という形を保ち続けます。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Features</div>
+        <h2>革靴と過ごす日々を、記録に。</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="feature-grid reveal">
+        <div class="feature">
+          <div class="tag">RECORD 01</div>
+          <h3>靴を登録する</h3>
+          <p>ブランドやカラーなど基本情報を記録。登録した順に並ぶ、あなただけの靴棚ができていきます。</p>
+        </div>
+        <div class="feature">
+          <div class="tag">RECORD 02</div>
+          <h3>着用・お手入れ・修理を記録</h3>
+          <p>ワンタップで「着用」「お手入れ」「修理」を記録。日々の積み重ねが、その一足の履歴になります。</p>
+        </div>
+        <div class="feature">
+          <div class="tag">RECORD 03</div>
+          <h3>お手入れ項目は自分仕様に</h3>
+          <p>クリーム、ブラシ、防水スプレー…プリセットに加えて、自分だけの項目を自由に追加・並べ替えできます。</p>
+        </div>
+        <div class="feature">
+          <div class="tag">RECORD 04</div>
+          <h3>ウェアマトリックスで一目瞭然</h3>
+          <p>直近90日間の着用・お手入れ・修理をグリッドで俯瞰。手が回っていない一足がすぐわかります。</p>
+        </div>
+        <div class="feature">
+          <div class="tag">RECORD 05</div>
+          <h3>アラートで手入れを忘れない</h3>
+          <p>「着用〇回ごとに」「〇日ごとに」など、靴・項目ごとにルールを設定。タイミングが来たら通知でお知らせします。</p>
+        </div>
+        <div class="feature">
+          <div class="tag">RECORD 06</div>
+          <h3>歩数と連動</h3>
+          <p>ヘルスケア／Health Connectと連携し、着用中に歩いた歩数をその一足の記録に残せます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how" style="background:var(--paper-raised); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">How it works</div>
+        <h2>始め方は、3つだけ。</h2>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="num">01 — 登録する</div>
+          <h3>最初の1足を登録</h3>
+          <p>ブランド・カラーなど基本情報を入力するだけ。写真はあとから追加できます。</p>
+        </div>
+        <div class="step">
+          <div class="num">02 — 記録する</div>
+          <h3>履いたら、手入れしたら記録</h3>
+          <p>「着用」「お手入れ」「修理」をその都度タップ。記録はそのまま履歴として積み重なります。</p>
+        </div>
+        <div class="step">
+          <div class="num">03 — 続ける</div>
+          <h3>アラートに沿って無理なく</h3>
+          <p>設定したルールに沿って、手入れのタイミングを通知でお知らせ。習慣として続けられます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Plan</div>
+        <h2>まずは無料で、3足まで。</h2>
+      </div>
+      <div class="plans reveal">
+        <div class="plan">
+          <div class="plan-name">FREE</div>
+          <div class="plan-price">¥0</div>
+          <ul>
+            <li>革靴を3足まで登録</li>
+            <li>着用・お手入れ・修理の記録</li>
+            <li>お手入れ項目・アラートのカスタマイズ</li>
+            <li>ウェアマトリックス表示</li>
+            <li>複数端末でのサインイン・引き継ぎ</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="plan-name">PRO</div>
+          <div class="plan-price">月額 / 年額<small>　プランをご用意</small></div>
+          <ul>
+            <li>革靴の登録数が無制限</li>
+            <li>無料プランの全機能を継続利用</li>
+          </ul>
+          <div class="plan-note">正確な価格はアプリ内でご確認いただけます。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-final reveal">
+    <div class="container">
+      <div class="eyebrow" style="justify-content:center;">Get started</div>
+      <h2 style="margin-top:14px;">その一足の記録を、今日から。</h2>
+      <p>公開までもう少しお待ちください。準備が整い次第、お知らせします。</p>
+      <div class="hero-actions">
+        <span class="badge-soon"><span class="dot"></span>App Store 近日公開</span>
+        <a class="link-notify" href="mailto:ishida.ippei.shoetree@gmail.com?subject=ShoeTreeの公開通知を希望">
+          公開時にお知らせを受け取る →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <a class="brand" href="#top">
+        <span class="mark">👞</span>
+        <span class="word">SHOETREE</span>
+      </a>
+      <div class="foot-links">
+        <a href="#features">特徴</a>
+        <a href="#how">使い方</a>
+        <a href="#pricing">プラン</a>
+        <a href="https://x.com/ShoeTreeApp">X (@ShoeTreeApp)</a>
+        <a href="support.html">お問い合わせ</a>
+      </div>
+    </div>
+    <hr class="rule" style="margin:28px 0;">
+    <div class="foot-legal">
+      <span>個人開発アプリです — 石田一平</span>
+      <div style="display:flex; gap:18px;">
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="terms.html">利用規約</a>
+        <span>© 2026 ShoeTree</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) {
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
 </body>
 </html>
