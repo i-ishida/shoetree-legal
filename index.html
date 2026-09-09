@@ -116,7 +116,7 @@
     font-size:16px;
   }
   .hero-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:36px; }
-  .badge-soon{
+  .badge-live{
     display:inline-flex; align-items:center; gap:9px;
     background:var(--accent-bg);
     border:1px solid var(--line-strong);
@@ -127,7 +127,7 @@
     padding:12px 20px;
     border-radius:100px;
   }
-  .badge-soon .dot{
+  .badge-live .dot{
     width:7px; height:7px; border-radius:50%;
     background:var(--accent);
     box-shadow:0 0 0 0 rgba(214,154,84,.55);
@@ -138,15 +138,20 @@
     70%{ box-shadow:0 0 0 8px rgba(214,154,84,0); }
     100%{ box-shadow:0 0 0 0 rgba(214,154,84,0); }
   }
-  @media (prefers-reduced-motion: reduce){ .badge-soon .dot{ animation:none; } }
-  .link-notify{
+  @media (prefers-reduced-motion: reduce){ .badge-live .dot{ animation:none; } }
+  .btn-appstore{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--accent);
+    color:var(--accent-ink);
+    font-family:var(--font-mono);
     font-size:14px;
-    color:var(--muted);
-    text-decoration:underline;
-    text-underline-offset:4px;
-    text-decoration-color:var(--line-strong);
+    letter-spacing:.04em;
+    padding:13px 24px;
+    border-radius:100px;
+    text-decoration:none;
+    transition:opacity .15s;
   }
-  .link-notify:hover{ color:var(--ink); text-decoration-color:var(--accent); }
+  .btn-appstore:hover{ opacity:.85; }
 
   .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
   @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
@@ -302,10 +307,8 @@
           一足ずつ登録して、履いた日もお手入れした日も、そのまま記録として積み重なっていきます。
         </p>
         <div class="hero-actions">
-          <span class="badge-soon"><span class="dot"></span>App Store 近日公開</span>
-          <a class="link-notify" href="mailto:contact@shoetree.app?subject=ShoeTreeの公開通知を希望">
-            公開時にお知らせを受け取る →
-          </a>
+          <a class="btn-appstore" href="https://apps.apple.com/app/id6793043430" target="_blank" rel="noopener">App Storeでダウンロード</a>
+          <span class="badge-live"><span class="dot"></span>iOSアプリ公開中</span>
         </div>
       </div>
 
@@ -487,12 +490,9 @@
     <div class="container">
       <div class="eyebrow" style="justify-content:center;">Get started</div>
       <h2 style="margin-top:14px;">その一足の記録を、今日から。</h2>
-      <p>公開までもう少しお待ちください。準備が整い次第、お知らせします。</p>
+      <p>App Storeから今すぐダウンロードできます。</p>
       <div class="hero-actions">
-        <span class="badge-soon"><span class="dot"></span>App Store 近日公開</span>
-        <a class="link-notify" href="mailto:contact@shoetree.app?subject=ShoeTreeの公開通知を希望">
-          公開時にお知らせを受け取る →
-        </a>
+        <a class="btn-appstore" href="https://apps.apple.com/app/id6793043430" target="_blank" rel="noopener">App Storeでダウンロード</a>
       </div>
     </div>
   </section>
