@@ -153,6 +153,20 @@
   }
   .btn-appstore:hover{ opacity:.85; }
 
+  .ig-notice{
+    display:flex; align-items:flex-start; gap:8px;
+    background:var(--accent-bg);
+    border:1px solid var(--line-strong);
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+    padding:12px 16px;
+    border-radius:12px;
+    margin-top:14px;
+    max-width:440px;
+  }
+  .ig-notice[hidden]{ display:none; }
+
   .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
   @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
 
@@ -265,6 +279,7 @@
   .cta-final h2{ font-size:clamp(24px,4vw,36px); }
   .cta-final p{ color:var(--muted); margin:16px auto 0; max-width:440px; }
   .cta-final .hero-actions{ justify-content:center; margin-top:32px; }
+  .cta-final .ig-notice{ margin-left:auto; margin-right:auto; text-align:left; }
 
   /* ---------- footer ---------- */
   footer{ border-top:1px solid var(--line); padding:48px 0 40px; }
@@ -310,6 +325,7 @@
           <a class="btn-appstore" href="https://apps.apple.com/app/id6793043430">App Storeでダウンロード</a>
           <span class="badge-live"><span class="dot"></span>iOSアプリ公開中</span>
         </div>
+        <p class="ig-notice" hidden>⚠️ Instagramのアプリ内ブラウザからは開けない場合があります。右上の「•••」メニューから「ブラウザで開く」を選択してください。</p>
       </div>
 
       <div class="phone-wrap reveal">
@@ -494,6 +510,7 @@
       <div class="hero-actions">
         <a class="btn-appstore" href="https://apps.apple.com/app/id6793043430">App Storeでダウンロード</a>
       </div>
+      <p class="ig-notice" hidden>⚠️ Instagramのアプリ内ブラウザからは開けない場合があります。右上の「•••」メニューから「ブラウザで開く」を選択してください。</p>
     </div>
   </section>
 
@@ -542,6 +559,20 @@
       });
     }, { threshold: 0.15 });
     els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
+<script>
+  (function(){
+    // Instagram's in-app browser can't hand off to the App Store app
+    // (no Universal Links support), so apps.apple.com links silently do
+    // nothing there. Point people at its own "Open in external browser"
+    // menu instead, since that's the one thing that reliably works.
+    if (/Instagram/i.test(navigator.userAgent || '')) {
+      document.querySelectorAll('.ig-notice').forEach(function(el){
+        el.hidden = false;
+      });
+    }
   })();
 </script>
 
