@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="革靴を記録する、お手入れを続ける。着用・お手入れ・修理の記録をシンプルに管理する、革靴のための手入れ手帳アプリ ShoeTree（シューツリー）。">
-<title>ShoeTree — 革靴の手入れ手帳</title>
+<meta name="description" content="ShoeTree（シューツリー）の使い方ガイド。靴の登録、着用・お手入れ・修理の記録、アラートの設定、履歴の見方、ビフォーアフター共有までを順番に解説します。">
+<title>使い方ガイド — ShoeTree</title>
 <style>
   /* Single committed dark theme, matching the app's own "Atelier Noir" identity
      (paper.dart), which deliberately ships with no light variant. This page
@@ -290,244 +290,200 @@
   .foot-legal{ margin-top:28px; display:flex; justify-content:flex-end; flex-wrap:wrap; gap:10px; }
   .foot-legal span, .foot-legal a{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted-2); text-decoration:none; }
   .foot-legal a:hover{ color:var(--muted); }
+
+  /* ---------- guide ---------- */
+  .guide-hero{ padding:72px 0 40px; }
+  .guide-hero h1{ font-size:clamp(28px,4.6vw,44px); margin-top:18px; }
+  .guide-hero p{ max-width:560px; color:var(--muted); margin:18px 0 0; }
+  .guide-layout{ display:grid; grid-template-columns:220px 1fr; gap:56px; align-items:start; padding-bottom:96px; }
+  @media (max-width:860px){ .guide-layout{ grid-template-columns:1fr; gap:32px; } }
+  .toc{ position:sticky; top:88px; display:flex; flex-direction:column; gap:2px; border-left:1px solid var(--line); }
+  .toc a{ font-size:13.5px; color:var(--muted); text-decoration:none; padding:6px 0 6px 16px; margin-left:-1px; border-left:1px solid transparent; }
+  .toc a:hover{ color:var(--ink); border-left-color:var(--accent); }
+  @media (max-width:860px){ .toc{ position:static; } }
+  .g-section{ padding:8px 0 56px; scroll-margin-top:88px; }
+  .g-section + .g-section{ border-top:1px solid var(--line); padding-top:56px; }
+  .g-section h2{ font-size:clamp(22px,3vw,28px); margin-top:12px; }
+  .g-section h3{ font-size:17px; margin:32px 0 0; }
+  .g-section p, .g-section li{ color:var(--muted); font-size:15px; }
+  .g-section p{ margin:14px 0 0; max-width:640px; }
+  .g-section p strong, .g-section li strong{ color:var(--ink); font-weight:600; }
+  .g-section ol, .g-section ul{ margin:14px 0 0; padding-left:1.3em; max-width:640px; }
+  .g-section li{ margin:6px 0; }
+  .tip{
+    margin-top:20px; max-width:640px;
+    background:var(--accent-bg); border:1px solid var(--line-strong); border-radius:12px;
+    padding:14px 18px; font-size:14px; color:var(--muted);
+  }
+  .tip b{ font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--accent); margin-right:8px; }
 </style>
 </head>
 <body>
 
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="#top">
+    <a class="brand" href="./">
       <span class="mark">👞</span>
       <span class="word">SHOETREE</span>
     </a>
     <nav class="links">
-      <a href="#features">特徴</a>
+      <a href="./#features">特徴</a>
       <a href="guide.html">使い方</a>
-      <a href="#pricing">プラン</a>
-      <a href="#contact" class="cta">お問い合わせ</a>
+      <a href="./#pricing">プラン</a>
+      <a href="support.html" class="cta">お問い合わせ</a>
     </nav>
   </div>
 </header>
 
-<main id="top">
-
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="hero-mark">👞</div>
-        <div class="eyebrow">革靴の手入れ手帳</div>
-        <h1>革靴を記録する、<br>お手入れを続ける。</h1>
-        <p class="lede">
-          着用・お手入れ・修理の記録をシンプルに。あなたの革靴のための手入れ手帳です。
-          一足ずつ登録して、履いた日もお手入れした日も、そのまま記録として積み重なっていきます。
-        </p>
-        <div class="hero-actions">
-          <a class="btn-appstore" href="https://apps.apple.com/app/id6793043430">App Storeでダウンロード</a>
-          <span class="badge-live"><span class="dot"></span>iOSアプリ公開中</span>
-        </div>
-        <p class="ig-notice" hidden>⚠️ Instagramのアプリ内ブラウザからは開けない場合があります。右上の「•••」メニューから「ブラウザで開く」を選択してください。</p>
-      </div>
-
-      <div class="phone-wrap reveal">
-        <div class="phone">
-          <div class="phone-notch"></div>
-          <div class="phone-head">
-            <div>
-              <div class="t1">SHOETREE</div>
-              <div class="t2">靴棚</div>
-            </div>
-            <div class="t1">4足登録中</div>
-          </div>
-
-          <div class="shoe-row">
-            <div class="swatch tone-brown"></div>
-            <div class="shoe-meta">
-              <div class="name">ストレートチップ</div>
-              <div class="sub">ブラウン ・ 最終着用 3日前</div>
-            </div>
-            <div class="shoe-flag flag-ok">良好</div>
-          </div>
-
-          <div class="shoe-row">
-            <div class="swatch tone-black"></div>
-            <div class="shoe-meta">
-              <div class="name">プレーントゥ</div>
-              <div class="sub">ブラック ・ 最終手入れ 21日前</div>
-            </div>
-            <div class="shoe-flag flag-due">手入れ推奨</div>
-          </div>
-
-          <div class="shoe-row">
-            <div class="swatch tone-navy"></div>
-            <div class="shoe-meta">
-              <div class="name">ローファー</div>
-              <div class="sub">ネイビー ・ 最終着用 昨日</div>
-            </div>
-            <div class="shoe-flag flag-ok">良好</div>
-          </div>
-
-          <div class="shoe-row">
-            <div class="swatch tone-burgundy"></div>
-            <div class="shoe-meta">
-              <div class="name">ウイングチップ</div>
-              <div class="sub">バーガンディ ・ 修理履歴あり</div>
-            </div>
-            <div class="shoe-flag flag-ok">良好</div>
-          </div>
-
-          <div class="phone-foot">
-            <span>WEAR ・ CARE ・ REPAIR</span>
-            <span>90日ビュー</span>
-          </div>
-        </div>
-      </div>
+<main>
+  <section class="guide-hero">
+    <div class="container">
+      <div class="eyebrow">Guide</div>
+      <h1>ShoeTree 使い方ガイド</h1>
+      <p>靴を登録してから、毎日の記録、お手入れの通知、履歴の見返しまで。アプリの基本の使い方を順番にご案内します。</p>
     </div>
   </section>
 
-  <section class="about">
-    <div class="container about-grid">
-      <div class="reveal">
-        <div class="photo-frame">
-          <img src="img/shoe-tree.jpg" alt="職人の手で革靴にシューツリー（木型）を差し込んでいる様子">
-        </div>
-      </div>
-      <div class="reveal">
-        <div class="eyebrow">名前の由来</div>
-        <h2>シューツリーは、木型の名前。</h2>
-        <p>
-          シューツリーとは、履き終えた革靴に入れてその形を保つための木型（シューキーパー）のこと。
-          一足の革靴と長く付き合うための、いちばん身近な道具です。
-        </p>
-        <p>
-          アプリの中の<strong>「シューツリー」</strong>も、役割は同じです。
-          いつ履いたか、いつ手入れをしたか、いつ修理に出したか——
-          その一足だけのために、記録という形を保ち続けます。
-        </p>
-      </div>
-    </div>
-  </section>
+  <div class="container guide-layout">
+    <nav class="toc" aria-label="目次">
+      <a href="#start">1. はじめに</a>
+      <a href="#register">2. 靴を登録する</a>
+      <a href="#record">3. 毎日の記録</a>
+      <a href="#care">4. お手入れ・修理を記録する</a>
+      <a href="#alerts">5. アラートで手入れを忘れない</a>
+      <a href="#history">6. 履歴を見返す</a>
+      <a href="#share">7. ビフォーアフターを共有</a>
+      <a href="#account">8. アカウント連携と引き継ぎ</a>
+      <a href="#plan">9. 無料プランとPro</a>
+    </nav>
 
-  <section class="section" id="features">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow">Features</div>
-        <h2>革靴と過ごす日々を、記録に。</h2>
-      </div>
-    </div>
-    <div class="container">
-      <div class="feature-grid reveal">
-        <div class="feature">
-          <div class="tag">RECORD 01</div>
-          <h3>靴を登録する</h3>
-          <p>ブランドやカラーなど基本情報を記録。登録した順に並ぶ、あなただけの靴棚ができていきます。</p>
-        </div>
-        <div class="feature">
-          <div class="tag">RECORD 02</div>
-          <h3>着用・お手入れ・修理を記録</h3>
-          <p>ワンタップで「着用」「お手入れ」「修理」を記録。日々の積み重ねが、その一足の履歴になります。</p>
-        </div>
-        <div class="feature">
-          <div class="tag">RECORD 03</div>
-          <h3>お手入れ項目は自分仕様に</h3>
-          <p>クリーム、ブラシ、防水スプレー…プリセットに加えて、自分だけの項目を自由に追加・並べ替えできます。</p>
-        </div>
-        <div class="feature">
-          <div class="tag">RECORD 04</div>
-          <h3>ウェアマトリックスで一目瞭然</h3>
-          <p>直近90日間の着用・お手入れ・修理をグリッドで俯瞰。手が回っていない一足がすぐわかります。</p>
-        </div>
-        <div class="feature">
-          <div class="tag">RECORD 05</div>
-          <h3>アラートで手入れを忘れない</h3>
-          <p>「着用〇回ごとに」「〇日ごとに」など、靴・項目ごとにルールを設定。タイミングが来たら通知でお知らせします。</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <div>
+      <section class="g-section" id="start">
+        <div class="eyebrow">01</div>
+        <h2>はじめに</h2>
+        <p>ShoeTreeは、革靴の「着用」「お手入れ」「修理」を記録する手入れ手帳アプリです。下のタブから、次の4つの画面を行き来して使います。</p>
+        <ul>
+          <li><strong>ホーム</strong>：今日履いた靴の記録や、手入れの記録をつける画面</li>
+          <li><strong>一覧</strong>：登録した靴の一覧（靴棚）と、靴の登録</li>
+          <li><strong>履歴</strong>：着用・お手入れ・修理の記録を、まとめて見返す画面</li>
+          <li><strong>設定</strong>：お手入れ項目、アラート、通知、アカウントの設定</li>
+        </ul>
+        <div class="tip"><b>POINT</b>アカウント登録は不要です。インストールしてすぐに使い始められます。</div>
+      </section>
 
-  <section class="section" id="how" style="background:var(--paper-raised); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow">How it works</div>
-        <h2>始め方は、3つだけ。</h2>
-      </div>
-      <div class="steps reveal">
-        <div class="step">
-          <div class="num">01 — 登録する</div>
-          <h3>最初の1足を登録</h3>
-          <p>ブランド・カラーなど基本情報を入力するだけ。写真はあとから追加できます。</p>
-        </div>
-        <div class="step">
-          <div class="num">02 — 記録する</div>
-          <h3>履いたら、手入れしたら記録</h3>
-          <p>「着用」「お手入れ」「修理」をその都度タップ。記録はそのまま履歴として積み重なります。</p>
-        </div>
-        <div class="step">
-          <div class="num">03 — 続ける</div>
-          <h3>アラートに沿って無理なく</h3>
-          <p>設定したルールに沿って、手入れのタイミングを通知でお知らせ。習慣として続けられます。</p>
-        </div>
-      </div>
-      <p class="reveal" style="margin:40px 0 0;"><a href="guide.html" style="color:var(--accent); font-family:var(--font-mono); font-size:14px; letter-spacing:.04em; text-decoration:none;">詳しい使い方ガイドを見る →</a></p>
-    </div>
-  </section>
+      <section class="g-section" id="register">
+        <div class="eyebrow">02</div>
+        <h2>靴を登録する</h2>
+        <ol>
+          <li>「一覧」タブを開き、新しい靴を追加します。</li>
+          <li>ブランドやモデル名、カラーなどの基本情報を入力します。デザインやレザーの種類などは、候補から選ぶだけで入力できます。</li>
+          <li>保存すると、靴棚に登録されます。</li>
+        </ol>
+        <div class="tip"><b>TIP</b>写真はあとから追加できます。まずは名前とカラーだけでも登録して大丈夫です。</div>
+        <h3>履かなくなった靴は「アーカイブ」</h3>
+        <p>手放した靴や履かなくなった靴は、削除せずにアーカイブしておけます。理由を選んで残しておけば、それまでの記録も履歴として手元に残ります。</p>
+      </section>
 
-  <section class="section" id="pricing">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow">Plan</div>
-        <h2>まずは無料で、3足まで。</h2>
-      </div>
-      <div class="plans reveal">
-        <div class="plan">
-          <div class="plan-name">FREE</div>
-          <div class="plan-price">¥0</div>
-          <ul>
-            <li>革靴を3足まで登録</li>
-            <li>着用・お手入れ・修理の記録</li>
-            <li>お手入れ項目・アラートのカスタマイズ</li>
-            <li>ウェアマトリックス表示</li>
-            <li>複数端末でのサインイン・引き継ぎ</li>
-          </ul>
-        </div>
-        <div class="plan pro">
-          <div class="plan-name">PRO</div>
-          <div class="plan-price">月額 / 年額<small>　プランをご用意</small></div>
-          <ul>
-            <li>革靴の登録数が無制限</li>
-            <li>無料プランの全機能を継続利用</li>
-          </ul>
-          <div class="plan-note">正確な価格はアプリ内でご確認いただけます。</div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <section class="g-section" id="record">
+        <div class="eyebrow">03</div>
+        <h2>毎日の記録</h2>
+        <p>いちばん使うのが「ホーム」です。その日に履いた靴を選んで記録するだけで、着用の履歴が積み重なっていきます。</p>
+        <ol>
+          <li>ホームで、今日履いた靴をタップして選びます（複数選択もできます）。</li>
+          <li>「この内容で記録する」をタップします。</li>
+        </ol>
+        <p>靴が増えてきたら、モデル名やブランドで検索して絞り込めます。日付を切り替えれば、記録し忘れた日の分もあとから追加できます。</p>
+        <p>雨に濡れた日は、その旨も一緒に記録できます。手入れが必要かどうかの判断材料になります。</p>
+        <div class="tip"><b>TIP</b>「記録リマインダー」をオンにすると、毎日決まった時刻に、履いた靴の記録を促す通知が届きます（設定 → 通知）。</div>
+      </section>
 
-  <section class="section cta-final reveal">
+      <section class="g-section" id="care">
+        <div class="eyebrow">04</div>
+        <h2>お手入れ・修理を記録する</h2>
+        <p>靴を1足ずつ開くと、その靴の詳細画面から「お手入れ」や「修理」を記録できます。</p>
+        <h3>お手入れの記録</h3>
+        <p>ブラッシング、クリーム、防水スプレーなど、行った項目を選んで記録します。写真やメモも残せます。</p>
+        <h3>修理の記録</h3>
+        <p>ソール交換やかかとの修理など、修理の内容を選んで記録します。部位や対象の足も選べるので、「右足のかかと」のように細かく残せます。</p>
+        <h3>お手入れ項目は自分仕様に</h3>
+        <p>「設定 → 手入れ項目を編集」で、項目の追加・名前の変更・並べ替え・削除ができます。使っているクリームやブラシの名前で登録しておくと、記録がぐっと楽になります。修理項目も同じように編集できます。</p>
+      </section>
+
+      <section class="g-section" id="alerts">
+        <div class="eyebrow">05</div>
+        <h2>アラートで手入れを忘れない</h2>
+        <p>「クリームをしてから30日」「履いてから5回」のように、お手入れや修理のタイミングを自分で決めて、通知を受け取れます。</p>
+        <ol>
+          <li>「設定 → アラートルール」を開きます。</li>
+          <li>「＋ 新しいアラートを追加」をタップします。</li>
+          <li>何を基準にするか（履いてから／手入れ項目／修理の種類）と、日数または回数を設定します。</li>
+          <li>「設定 → アラート通知」がオンになっていれば完了です。</li>
+        </ol>
+        <h3>全ての靴共通と、靴ごとの設定</h3>
+        <p>ルールは基本的に全ての靴に共通で適用されます。特定の靴だけ間隔を変えたいときは、その靴用にルールを「上書き」できます。</p>
+        <div class="tip"><b>NOTE</b>通知が届かないときは、端末の設定アプリでShoeTreeの通知が許可されているかをご確認ください。</div>
+      </section>
+
+      <section class="g-section" id="history">
+        <div class="eyebrow">06</div>
+        <h2>履歴を見返す</h2>
+        <p>「履歴」タブでは、直近の着用・お手入れ・修理をグリッド（ウェアマトリックス）で一覧できます。靴ごとに日付が並ぶので、最近ぜんぜん履いていない靴や、手入れが空いている靴がひと目でわかります。</p>
+        <p>靴ごとの履歴画面では、その一足のこれまでの記録を時系列で確認できます。手入れの写真も、アルバムとしてまとめて見返せます。</p>
+      </section>
+
+      <section class="g-section" id="share">
+        <div class="eyebrow">07</div>
+        <h2>ビフォーアフターを共有</h2>
+        <p>靴の詳細画面のアルバムから、お手入れの前後で撮った写真を2枚選ぶと、ビフォーアフターの共有カードを作れます。作ったカードは写真アプリへ保存でき、SNSなどにそのまま投稿できます。</p>
+        <div class="tip"><b>NOTE</b>写真アプリへの保存には、写真へのアクセス許可が必要です。許可していない場合は、案内に従って端末の設定から許可してください。</div>
+      </section>
+
+      <section class="g-section" id="account">
+        <div class="eyebrow">08</div>
+        <h2>アカウント連携と引き継ぎ</h2>
+        <p>ShoeTreeは、はじめはアカウントなしで使えます。機種変更や端末の紛失に備えて、Apple、Google、メールアドレスのいずれかと連携しておくのがおすすめです。</p>
+        <ol>
+          <li>「設定 → アカウント連携」を開きます。</li>
+          <li>使いたいサインイン方法を選んで、画面の案内に従います。</li>
+        </ol>
+        <p>連携しておけば、新しい端末で同じ方法でサインインするだけで、登録した靴や記録を引き継げます。</p>
+      </section>
+
+      <section class="g-section" id="plan">
+        <div class="eyebrow">09</div>
+        <h2>無料プランとPro</h2>
+        <p>無料プランでは、靴を3足まで登録できます。記録、アラート、履歴などの機能は、無料プランでもそのままお使いいただけます。</p>
+        <p>4足以上登録したい場合は、Proプランをご利用ください。正確な価格はアプリ内でご確認いただけます。</p>
+      </section>
+
+      <section class="g-section">
+        <h2>困ったときは</h2>
+        <p>ここで解決しないことがあれば、<a href="support.html" style="color:var(--accent);">お問い合わせページ</a>からご連絡ください。</p>
+      </section>
+    </div>
+  </div>
+
+  <section class="section cta-final" style="border-top:1px solid var(--line);">
     <div class="container">
-      <div class="eyebrow" style="justify-content:center;">Get started</div>
-      <h2 style="margin-top:14px;">その一足の記録を、今日から。</h2>
-      <p>App Storeから今すぐダウンロードできます。</p>
+      <h2>その一足の記録を、今日から。</h2>
       <div class="hero-actions">
         <a class="btn-appstore" href="https://apps.apple.com/app/id6793043430">App Storeでダウンロード</a>
       </div>
-      <p class="ig-notice" hidden>⚠️ Instagramのアプリ内ブラウザからは開けない場合があります。右上の「•••」メニューから「ブラウザで開く」を選択してください。</p>
     </div>
   </section>
-
 </main>
 
-<footer id="contact">
+<footer>
   <div class="container">
     <div class="foot-grid">
-      <a class="brand" href="#top">
+      <a class="brand" href="./">
         <span class="mark">👞</span>
         <span class="word">SHOETREE</span>
       </a>
       <div class="foot-links">
-        <a href="#features">特徴</a>
+        <a href="./#features">特徴</a>
         <a href="guide.html">使い方</a>
-        <a href="#pricing">プラン</a>
+        <a href="./#pricing">プラン</a>
         <a href="https://x.com/ShoeTreeApp">X (@ShoeTreeApp)</a>
         <a href="support.html">お問い合わせ</a>
       </div>
@@ -542,40 +498,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-  (function(){
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var els = document.querySelectorAll('.reveal');
-    if (reduced || !('IntersectionObserver' in window)) {
-      els.forEach(function(el){ el.classList.add('in'); });
-      return;
-    }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    els.forEach(function(el){ io.observe(el); });
-  })();
-</script>
-
-<script>
-  (function(){
-    // Instagram's in-app browser can't hand off to the App Store app
-    // (no Universal Links support), so apps.apple.com links silently do
-    // nothing there. Point people at its own "Open in external browser"
-    // menu instead, since that's the one thing that reliably works.
-    if (/Instagram/i.test(navigator.userAgent || '')) {
-      document.querySelectorAll('.ig-notice').forEach(function(el){
-        el.hidden = false;
-      });
-    }
-  })();
-</script>
 
 </body>
 </html>
